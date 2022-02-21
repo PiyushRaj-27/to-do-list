@@ -5,17 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
     <title>TO DO List</title>
 </head>
 <body>
     <div id="container">
         <div id="title">To Do List</div>
         <div id="events">
-            <div class="eventcard">
-                <div class="eventtitle">Meeting</div>
-                <div class="eventtime">10:00 2022-02-27</div>
-                <div class="eventdesc">The meeting regarding the discussion of company sales</div>
+            <div class="eventcard" id="card0">
+                <div class="eventtitle" id="title0">Meeting</div>
+                <div class="eventtime" id="time0">10:00</div>
+                <div class="eventdate" id="date0">2022-02-27</div>
+                <div class="eventdesc" id="desc0">The meeting regarding the discussion of company sales</div>
                 <button class="delete" onclick="deleteEvent(this)">Delete</button>
+                <button class="delete" onclick="editEvent(this)">Edit</button>
             </div>
         </div>
         <div id="addbtn" onclick="reveal()">Add Events</div>
@@ -37,67 +40,20 @@
             <button class="fbut" type="button" onclick="hide()">Close</button>
         </form>
     </div>
+    <div id="formlayer2">
+        <div id="text">Event Details</div>
+        <form>
+            <label for="ftitle2">Event Title: </label>
+            <input type="text" name="ftitle2" id="ftitle2"> <br><br>
+            <label for="ftime2">Event Time: </label>
+            <input type="time" name="ftime2" id="ftime2"> <br><br>
+            <label for="fdate2">Event Date: </label>
+            <input type="date" name="fdate2" id="fdate2"> <br> <br>
+            <label for="Desc">Event Description: </label>
+            <input type="text" name="fdesc2" id="fdesc2"> <br>
+            <button class="fbut" id="abut" type="button" >Submit</button>
+            <button class="fbut" type="button" onclick="hide2()">Close</button>
+        </form>
+    </div>
 </body>
-<script>
-    function reveal(){
-        document.getElementById("layer1").style.display = "block";
-        document.getElementById("formlayer").style.display = "block";
-    }
-    function hide(){
-        document.getElementById("layer1").style.display = "none";
-        document.getElementById("formlayer").style.display = "none";
-        document.getElementById("ftitle").value = '';
-        document.getElementById("ftime").value = '';
-        document.getElementById("fdesc").value = '';
-        document.getElementById("fdate").value = '';
-
-    }
-
-    function addEvent(){
-        document.getElementById("layer1").style.display = "none";
-        document.getElementById("formlayer").style.display = "none"; 
-        let title = document.getElementById("ftitle").value;
-        let time = document.getElementById("ftime").value;
-        let desc = document.getElementById("fdesc").value;
-        // this will create the card
-        let card = document.createElement("div"); 
-        card.classList.add("eventcard");
-        //title div
-        let cardtitle = document.createElement("div");
-        cardtitle.classList.add("eventtitle"); 
-        cardtitle.innerHTML = title; 
-        card.appendChild(cardtitle);
-        //time div
-        let cardtime = document.createElement("div");
-        cardtime.classList.add("eventtime");
-        cardtime.innerHTML = time;
-        card.appendChild(cardtime);
-        //date
-        let date = document.getElementById("fdate").value;
-        cardtime.innerHTML += " " +date;
-        //desc div
-        let carddesc = document.createElement("div");
-        carddesc.classList.add("eventdesc");
-        carddesc.innerHTML = desc;
-        card.appendChild(carddesc);
-        // del button
-        let cardbtn = document.createElement("button");
-        cardbtn.classList.add("delete");
-        cardbtn.innerHTML = "Delete";
-        cardbtn.setAttribute("onclick","deleteEvent(this)")
-        card.appendChild(cardbtn);
-        // adding card to event
-        document.getElementById("events").appendChild(card);
-        //resseting the value of form inputs:
-        document.getElementById("ftitle").value = '';
-        document.getElementById("ftime").value = '';
-        document.getElementById("fdesc").value = '';
-        document.getElementById("fdate").value = '';
-
-    }
-    function deleteEvent(a){
-        let parentelem = a.parentNode;
-        document.getElementById("events").removeChild(parentelem);
-    }
-</script>
 </html>
